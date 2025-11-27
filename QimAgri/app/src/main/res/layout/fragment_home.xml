@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/title_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abeezee"
+            android:gravity="center"
+            android:text="Farming Pest and Disease Information"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.014" />
+
+        <ImageView
+            android:id="@+id/logo_app"
+            android:layout_width="233dp"
+            android:layout_height="191dp"
+            android:layout_marginTop="44dp"
+            android:src="@drawable/logo_qimagri"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_home" />
+
+        <TextView
+            android:id="@+id/description_app"
+            android:layout_width="300dp"
+            android:layout_height="163dp"
+            android:fontFamily="@font/abeezee"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.5"
+            android:text="QimAgri app is use to provide valuable information about pests and diseases along with their natural treatments."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo_app"
+            app:layout_constraintVertical_bias="0.028" />
+
+        <ImageView
+            android:id="@+id/logo_sdg_goal_two"
+            android:layout_width="233dp"
+            android:layout_height="191dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/logo_sdg_goal_two"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_app" />
+
+        <TextView
+            android:id="@+id/description_sdg_goal_two"
+            android:layout_width="335dp"
+            android:layout_height="267dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/abeezee"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.5"
+            android:text="This SDG goal 2 addresses the global issues of hunger and malnutrition. Focusing on creating a world free of hunger. It also seeks to double the agricultural productivity and incomes of small-scale food producers."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo_sdg_goal_two"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

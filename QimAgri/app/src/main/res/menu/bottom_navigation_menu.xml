@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:fontFamily="@font/abeezee"
+        android:title="Home"
+        android:icon="@drawable/icon_home"/>
+    <item
+        android:id="@+id/nav_pest_and_disease"
+        android:fontFamily="@font/abeezee"
+        android:title="Pests and Diseases"
+        android:icon="@drawable/icon_pest_and_disease"/>
+    <item
+        android:id="@+id/nav_natural_treatment"
+        android:fontFamily="@font/abeezee"
+        android:title="Natural Treatments"
+        android:icon="@drawable/icon_natural_treatment"/>
+    <item
+        android:id="@+id/nav_help"
+        android:fontFamily="@font/abeezee"
+        android:title="Help"
+        android:icon="@drawable/icon_help"/>
+</menu>

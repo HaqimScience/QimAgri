@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_green">#4CAF50</color>
+    <color name="tea_green">#DBF3C9</color>
+    <color name="honeydew">#EFFDEE</color>
+    <color name="light_green">#B7E892</color>
+    <color name="soil_brown">#DEAB90</color>
+    <color name="sun_yellow">#FFC107</color>
+    <color name="neutral_gray">#E0E0E0</color>
+    <color name="light_chocolate">#D2B48C</color>
+</resources>
