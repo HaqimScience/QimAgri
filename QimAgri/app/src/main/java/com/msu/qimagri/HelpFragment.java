@@ -42,7 +42,7 @@ public class HelpFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Help");
         Button buttonDeveloperInfo = view.findViewById(R.id.button_developer_info);
         Button buttonGuide = view.findViewById(R.id.button_guide);
         Button buttonKeyFeatures = view.findViewById(R.id.button_key_features);

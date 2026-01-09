@@ -1,59 +1,48 @@
-// Package name
+
 package com.msu.qimagri;
-// Libraries
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.widget.SearchView;
-import java.util.List;
+import com.msu.qimagri.util.DatabaseHelper;
 import java.util.ArrayList;
-import android.util.Log;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Scanner;
-// Class name
+import java.util.List;
+
 public class PestAndDiseaseFragment extends Fragment {
-    // Attributes
     private RecyclerView recyclerView;
     private PestAndDiseaseAdapter adapter;
     private List<PestAndDiseaseItem> pestAndDiseaseItemList = new ArrayList<>();
     private SearchView searchView;
+    private DatabaseHelper dbHelper;
 
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new DatabaseHelper(getContext());
     }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_pest_and_disease, container, false);
     }
+
     @Override
-    public void onViewCreated(@NonNull View view,
-                              @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if(activity != null && activity.getSupportActionBar() != null){
-            activity.getSupportActionBar().setTitle("Pests and Diseases");
-        }
         recyclerView = view.findViewById(R.id.list_pest_and_disease);
         searchView = view.findViewById(R.id.search_bar_pest_and_disease);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        loadTheDataFromJSON();
+        loadTheDataFromDatabase();
         adapter = new PestAndDiseaseAdapter(getContext(), pestAndDiseaseItemList);
         recyclerView.setAdapter(adapter);
         // Search filter
@@ -71,43 +60,29 @@ public class PestAndDiseaseFragment extends Fragment {
             }
         });
     }
-    // Load the data from JSON file
-    private void loadTheDataFromJSON() {
-        try {
-            pestAndDiseaseItemList.clear();
-            InputStream is = getResources().openRawResource(R.raw.data);
-            Scanner scanner = new Scanner(is).useDelimiter("\\A");
-            String json = scanner.hasNext() ? scanner.next() : "";
-            scanner.close();
 
-            JSONObject root = new JSONObject(json);
-            JSONArray pestsArray = root.getJSONArray("pests_and_diseases");
-
-            for (int i = 0; i < pestsArray.length(); i++) {
-                JSONObject obj = pestsArray.getJSONObject(i);
-                pestAndDiseaseItemList.add(new PestAndDiseaseItem(
-                        obj.getInt("id"),
-                        obj.getString("name"),
-                        obj.getString("type"),
-                        obj.getString("description"),
-                        obj.getString("image_name"),
-                        obj.getInt("natural_treatment_id")
-                ));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pests and Diseases");
         }
     }
-    // Search filter
-    private void filterList(String text) {
-        List<PestAndDiseaseItem> filteredList = new ArrayList<>();
-        for (PestAndDiseaseItem item : pestAndDiseaseItemList) {
-            if (item.getName().toLowerCase().contains(text.toLowerCase()) ||
-                    item.getDescription().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-            }
-        }
-        adapter.updateList(filteredList);
-    }
 
+    private void loadTheDataFromDatabase() {
+        pestAndDiseaseItemList.clear();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.query(DatabaseHelper.TABLE_PEST_DISEASE, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PD_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PD_NAME));
+            String type = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PD_TYPE));
+            String image = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PD_IMAGE));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PD_DESCRIPTION));
+            int naturalTreatmentId = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PD_NATURAL_TREATMENT_ID));
+            pestAndDiseaseItemList.add(new PestAndDiseaseItem(id, name, type, description, image, naturalTreatmentId));
+        }
+        cursor.close();
+    }
 }
