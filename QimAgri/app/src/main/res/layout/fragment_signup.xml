@@ -14,14 +14,23 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         app:srcCompat="@drawable/logo_qimagri" />
+=======
+        app:srcCompat="@drawable/empty_profile_picture" />
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
 
     <TextView
         android:id="@+id/title_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+<<<<<<< HEAD
         android:text="Register"
+=======
+        android:text="Sign up"
+        android:textSize="20dp"
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
         app:layout_constraintBottom_toTopOf="@+id/input_full_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -47,6 +56,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
+<<<<<<< HEAD
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/input_email_address"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +64,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture"
         app:layout_constraintVertical_bias="0.706" />
+=======
+        app:layout_constraintBottom_toTopOf="@+id/input_email_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+        app:layout_constraintVertical_bias="0.705" />
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
 
     <TextView
         android:id="@+id/label_email_address"
@@ -69,17 +87,29 @@
 
     <EditText
         android:id="@+id/input_email_address"
+<<<<<<< HEAD
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+=======
+        android:layout_width="219dp"
+        android:layout_height="43dp"
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
         android:layout_marginTop="188dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/input_phone_number"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture"
         app:layout_constraintVertical_bias="0.0" />
+=======
+        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+        app:layout_constraintVertical_bias="0.042" />
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
 
     <EditText
         android:id="@+id/input_phone_number"
@@ -89,10 +119,17 @@
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/input_password"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture"
         app:layout_constraintVertical_bias="0.865" />
+=======
+        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+        app:layout_constraintVertical_bias="0.844" />
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
 
     <TextView
         android:id="@+id/label_phone_number"
@@ -124,6 +161,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
+<<<<<<< HEAD
         app:layout_constraintBottom_toTopOf="@+id/button_delete_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.278"
@@ -133,6 +171,17 @@
 
     <Button
         android:id="@+id/button_delete_account"
+=======
+        app:layout_constraintBottom_toTopOf="@+id/button_sign_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+        app:layout_constraintVertical_bias="0.941" />
+
+    <Button
+        android:id="@+id/button_sign_up"
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="452dp"
@@ -140,6 +189,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.266"
+<<<<<<< HEAD
         app:layout_constraintStart_toEndOf="@+id/button_save"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture"
         app:layout_constraintVertical_bias="0.04" />
@@ -150,10 +200,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Back to Login"
+=======
+        app:layout_constraintStart_toEndOf="@+id/button_back_to_login"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+        app:layout_constraintVertical_bias="0.04"
+        android:background="@color/soil_brown"/>
+
+    <Button
+        android:id="@+id/button_back_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Login"
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.216"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_password"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.0" />
+=======
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@color/soil_brown"/>
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
 </androidx.constraintlayout.widget.ConstraintLayout>

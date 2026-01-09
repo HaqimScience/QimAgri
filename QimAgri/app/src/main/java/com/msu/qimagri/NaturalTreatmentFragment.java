@@ -1,51 +1,48 @@
-// Package name
+
 package com.msu.qimagri;
-// Libraries
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.widget.SearchView;
-import java.util.List;
+import com.msu.qimagri.util.DatabaseHelper;
 import java.util.ArrayList;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.util.List;
 
 public class NaturalTreatmentFragment extends Fragment {
-    // Attributes
     private RecyclerView recyclerView;
     private NaturalTreatmentAdapter adapter;
     private List<NaturalTreatmentItem> naturalTreatmentItemList = new ArrayList<>();
     private SearchView searchView;
+    private DatabaseHelper dbHelper;
 
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new DatabaseHelper(getContext());
     }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_natural_treatment, container, false);
     }
+
     @Override
-    public void onViewCreated(@NonNull View view,
-                              @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if(activity != null && activity.getSupportActionBar() != null){
-            activity.getSupportActionBar().setTitle("Natural Treatments");
-        }
         recyclerView = view.findViewById(R.id.list_natural_treatment);
         searchView = view.findViewById(R.id.search_bar_natural_treatment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        loadTheDataFromJSON();
+        loadTheDataFromDatabase();
         adapter = new NaturalTreatmentAdapter(getContext(), naturalTreatmentItemList);
         recyclerView.setAdapter(adapter);
         // Search filter
@@ -63,42 +60,28 @@ public class NaturalTreatmentFragment extends Fragment {
             }
         });
     }
-    // Load the data from JSON file
-    private void loadTheDataFromJSON() {
-        try {
-            naturalTreatmentItemList.clear();
-            InputStream is = getResources().openRawResource(R.raw.data);
-            Scanner scanner = new Scanner(is).useDelimiter("\\A");
-            String json = scanner.hasNext() ? scanner.next() : "";
-            scanner.close();
 
-            JSONObject root = new JSONObject(json);
-            JSONArray naturalTreatmentsArray = root.getJSONArray("natural_treatments");
-
-            for (int i = 0; i < naturalTreatmentsArray.length(); i++) {
-                JSONObject obj = naturalTreatmentsArray.getJSONObject(i);
-                naturalTreatmentItemList.add(new NaturalTreatmentItem(
-                        obj.getInt("id"),
-                        obj.getString("name"),
-                        obj.getString("description"),
-                        obj.getString("image_name"),
-                        obj.getInt("pest_and_disease_id")
-                ));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Natural Treatments");
         }
     }
-    // Search filter
-    private void filterList(String text) {
-        List<NaturalTreatmentItem> filteredList = new ArrayList<>();
-        for (NaturalTreatmentItem item : naturalTreatmentItemList) {
-            if (item.getName().toLowerCase().contains(text.toLowerCase()) ||
-                    item.getDescription().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-            }
-        }
-        adapter.updateList(filteredList);
-    }
 
+    private void loadTheDataFromDatabase() {
+        naturalTreatmentItemList.clear();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.query(DatabaseHelper.TABLE_NATURAL_TREATMENT, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TREATMENT_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TREATMENT_NAME));
+            String image = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TREATMENT_IMAGE));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TREATMENT_DESCRIPTION));
+            int pestAndDiseaseId = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TREATMENT_PEST_DISEASE_ID));
+            naturalTreatmentItemList.add(new NaturalTreatmentItem(id, name, description, image, pestAndDiseaseId));
+        }
+        cursor.close();
+    }
 }

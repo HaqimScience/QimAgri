@@ -13,7 +13,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         app:srcCompat="@drawable/logo_qimagri" />
+=======
+        app:srcCompat="@drawable/empty_profile_picture" />
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
 
     <TextView
         android:id="@+id/title_profile"
@@ -139,6 +143,7 @@
         app:layout_constraintStart_toEndOf="@+id/button_save"
         app:layout_constraintTop_toBottomOf="@+id/input_password" />
 
+<<<<<<< HEAD
     <Button
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
@@ -150,4 +155,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_save" />
 
+=======
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
 </androidx.constraintlayout.widget.ConstraintLayout>

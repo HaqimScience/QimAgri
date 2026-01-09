@@ -21,11 +21,14 @@
         android:title="Help"
         android:icon="@drawable/icon_help"/>
     <item
+<<<<<<< HEAD
         android:id="@+id/nav_bookmark"
         android:fontFamily="@font/abeezee"
         android:title="Bookmark"
         android:icon="@drawable/icon_bookmark"/>
     <item
+=======
+>>>>>>> 7986826799386c145b5d2635ecee9977c8d71acc
         android:id="@+id/nav_profile"
         android:fontFamily="@font/abeezee"
         android:title="Profile"
